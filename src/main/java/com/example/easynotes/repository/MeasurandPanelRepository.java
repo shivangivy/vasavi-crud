@@ -31,4 +31,5 @@ public interface MeasurandPanelRepository extends JpaRepository<MeasurandPanel, 
 	
 	@Query(value="SELECT c FROM MeasurandPanel m join m.metrics c WHERE m.panelId = :panelId and c.metricName like :metricName")
 	Metric findMetric(Integer panelId, String metricName);
+	
 }

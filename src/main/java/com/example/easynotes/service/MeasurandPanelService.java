@@ -31,23 +31,6 @@ public class MeasurandPanelService {
 
 	}
 
-	/*
-	 * public MeasurandPanel update(Integer panelId, @Valid MeasurandPanel
-	 * measuredDetails) { MeasurandPanel
-	 * panel=measurandpanelRepository.findById(panelId) .orElseThrow(() -> new
-	 * ResourceNotFoundException("MeasurePanel", "id", panelId));
-	 * panel.setPanelName(measuredDetails.getPanelName());
-	 * panel.setPanelDescription(measuredDetails.getPanelDescription()); 
-	 * if(panel.getMetrics().equals(measuredDetails.getMetrics())) // { 
-	 * System.out.println(" please add some other metric because with this name another metric is present"
-	 * ); return panel;
-	 * 
-	 * // for(Metric str:panel.getMetrics()) // { //
-	 * if(str.getMetricName().equals(measuredDetails.getMetrics().get(0))) // { //
-	 * System.out.println("preset change name"); // } // // } // return
-	 * measurandpanelRepository.save(measuredDetails);
-	 */
-
 	/**
 	 * find panel by id
 	 * 

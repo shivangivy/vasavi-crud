@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.easynotes.exception.ResourceNotFoundException;
+import com.example.easynotes.model.Developer;
 import com.example.easynotes.model.ProjectManager;
 import com.example.easynotes.repository.ProjectManagerRespository;
 
@@ -39,5 +40,12 @@ public class ProjectManagerService {
 		projectmanagerrepository.save(projectmanager);
 		return projectmanagerDetails;
 	}
+
+	public ProjectManager fetchProjectManagerId() {
+		
+		return projectmanagerrepository.fetchProjectManager();
+	}
+
+	
 
 }

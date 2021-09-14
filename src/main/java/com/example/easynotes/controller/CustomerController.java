@@ -33,22 +33,40 @@ public class CustomerController {
 	private final Logger log = LoggerFactory.getLogger(getClass());
 	@Autowired
 	CustomerService cutomerservice;
-
-	@PostMapping("/customer")
+	/**
+	 * @author Electem2s
+	 * @param <Customer>
+	 *
+	 */
+	@PostMapping("/custoddmer")
 	public Customer createNote(@Valid @RequestBody Customer customer) {
 		log.info("Start of CustomerController : createNote ");
 		return cutomerservice.saveCustomer(customer);
 		
 	}
+	/**
+	 * @author Electem2s
+	 * @param <Customer>
+	 *
+	 */
 
 	@GetMapping("/customers/{id}")
 	public Customer getCustomerById(@PathVariable(value = "id") Long customerid) {
 		return cutomerservice.fetchById(customerid);
 	}
-
+	/**
+	 * @author Electem2s
+	 * @param <Customer>
+	 *
+	 */
 	@PutMapping("/Customers/{id}")
-	public Customer UpdateCustomer(@PathVariable(value = "id") Long customerId,
-			@Valid @RequestBody Customer customerdetails) {
+	public Customer updateCustomer(@PathVariable final Long customerId,
+			@Valid @RequestBody final  Customer customerdetails) {
+		/**
+		 * @author Electem2s
+		 * @param <Customer>
+		 *
+		 */
 
 		Customer customer = cutomerservice.updateDateCustomer(customerdetails, customerId);
 		return customer;  

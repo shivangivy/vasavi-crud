@@ -43,10 +43,7 @@ public class MeasurandPaneController {
 		MeasurandPanel measuredPanel = new MeasurandPanel();
 		try {
 			if (measurepanel != null) {
-				measuredPanel = measuredpanelservice.save(measurepanel);
-//				System.out.println("sussessfully");
-//			}else {
-//				System.out.println("not sussfully");
+				measuredPanel = measuredpanelservice.save(measurepanel);				
 			}
 
 		} catch (ResourceNotFoundException e) {
