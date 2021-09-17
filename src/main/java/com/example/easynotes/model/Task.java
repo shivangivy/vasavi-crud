@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 /**
  * @author Electem2
@@ -33,7 +34,10 @@ public class Task {
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="developerId")
-	private Developer developer;	
+	private Developer developer;
+	
+	//@Transient
+	private Integer days;
 	/**
 	 * @return the taskId
 	 */
@@ -106,6 +110,24 @@ public class Task {
 	 */
 	public void setCompletedDate(Date completedDate) {
 		this.completedDate = completedDate;
+	}
+	/**
+	 * @return the days
+	 */
+	public Integer getDays() {
+		return days;
+	}
+	/**
+	 * @param days the days to set
+	 */
+	public void setDays(Integer days) {
+		this.days = days;
+	}
+	@Override
+	public String toString() {
+		return "Task [taskId=" + taskId + ", name=" + name + ", colourResult=" + colourResult + ", createdDate="
+				+ createdDate + ", completedDate=" + completedDate + ", developer=" + developer + ", days=" + days
+				+ "]";
 	}
 	
 }

@@ -18,18 +18,18 @@ import com.example.easynotes.model.Metric;
  *
  */
 @Repository
-public interface MeasurandPanelRepository extends JpaRepository<MeasurandPanel, Integer>{
+public interface MeasurandPanelRepository extends JpaRepository<MeasurandPanel, Integer> {
 
-	@Query(value="SELECT n FROM MeasurandPanel n WHERE n.panelId = :panelId")
-	MeasurandPanel findByPanelId(@Param(value="panelId") Integer panelId);
-	
-	@Query(value="SELECT c FROM MeasurandPanel m join m.metrics c WHERE m.panelId = :panelId ")
+	@Query(value = "SELECT n FROM MeasurandPanel n WHERE n.panelId = :panelId")
+	MeasurandPanel findByPanelId(@Param(value = "panelId") Integer panelId);
+
+	@Query(value = "SELECT c FROM MeasurandPanel m join m.metrics c WHERE m.panelId = :panelId ")
 	List<Metric> findMetricName(Integer panelId);
-	
-	@Query(value="SELECT c FROM MeasurandPanel m join m.metrics c WHERE m.panelId = :panelId and c.metricName like CONCAT('%',:metricName,'%') ")
+
+	@Query(value = "SELECT c FROM MeasurandPanel m join m.metrics c WHERE m.panelId = :panelId and c.metricName like CONCAT('%',:metricName,'%') ")
 	List<Metric> findMetricName(Integer panelId, String metricName);
-	
-	@Query(value="SELECT c FROM MeasurandPanel m join m.metrics c WHERE m.panelId = :panelId and c.metricName like :metricName")
+
+	@Query(value = "SELECT c FROM MeasurandPanel m join m.metrics c WHERE m.panelId = :panelId and c.metricName like :metricName")
 	Metric findMetric(Integer panelId, String metricName);
-	
+
 }

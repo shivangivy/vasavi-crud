@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.easynotes.model.Customer;
+import com.example.easynotes.repository.CustomerRepository;
 import com.example.easynotes.service.CustomerService;
 
 /**
@@ -31,8 +33,13 @@ import com.example.easynotes.service.CustomerService;
 public class CustomerController {
 	
 	private final Logger log = LoggerFactory.getLogger(getClass());
+	
 	@Autowired
 	CustomerService cutomerservice;
+	
+	@Autowired
+	CustomerRepository cutomerrepository;
+
 	/**
 	 * @author Electem2s
 	 * @param <Customer>
@@ -42,7 +49,7 @@ public class CustomerController {
 	public Customer createNote(@Valid @RequestBody Customer customer) {
 		log.info("Start of CustomerController : createNote ");
 		return cutomerservice.saveCustomer(customer);
-		
+
 	}
 	/**
 	 * @author Electem2s
@@ -76,6 +83,13 @@ public class CustomerController {
 	public List<Customer> getAllCustomers() {
 		return cutomerservice.fetchallCustomers();
 
+	}
+	@DeleteMapping("/customer/{id}")
+	public Customer deleteCustomer(@PathVariable(value = "id") Customer customerid)
+	{
+		cutomerrepository.delete(customerid);
+		return customerid;
+	
 	}
 
 }

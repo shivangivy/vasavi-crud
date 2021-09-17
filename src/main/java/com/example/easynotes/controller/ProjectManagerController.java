@@ -3,6 +3,8 @@
  */
 package com.example.easynotes.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.easynotes.model.Developer;
 import com.example.easynotes.model.ProjectManager;
+import com.example.easynotes.model.Task;
 import com.example.easynotes.service.ProjectManagerService;
 
 /**
@@ -49,5 +52,11 @@ public class ProjectManagerController {
 	public ProjectManager fetchProjectManager() {
 		return projectmanagerservice.fetchProjectManagerId();
 	}
+	
+	@GetMapping("/fetchColor/{id}")
+    public List<Task> findcolor(@PathVariable(value = "id") Integer projectmanagerId) {
+		return projectmanagerservice.findColor(projectmanagerId);
+	}
+	
 
 }

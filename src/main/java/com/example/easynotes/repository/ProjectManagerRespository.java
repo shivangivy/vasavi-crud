@@ -3,11 +3,14 @@
  */
 package com.example.easynotes.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.easynotes.model.ProjectManager;
+import com.example.easynotes.model.Task;
 
 /**
  * @author Electem2
@@ -24,6 +27,4 @@ public interface ProjectManagerRespository extends JpaRepository<ProjectManager,
 	ProjectManager fetchProjectManager();
 	
 	
-	
-
 }
