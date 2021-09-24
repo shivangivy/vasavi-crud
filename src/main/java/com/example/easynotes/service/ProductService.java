@@ -3,11 +3,14 @@
  */
 package com.example.easynotes.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.easynotes.exception.ResourceNotFoundException;
 import com.example.easynotes.model.Product;
+import com.example.easynotes.model.ProductType;
 import com.example.easynotes.repository.ProductRespository;
 
 /**
@@ -41,4 +44,15 @@ public class ProductService {
 
 	}
 
+	public List<Product> fetchallProduct(String name) {
+		if(!name.isEmpty())
+		{
+		 	return productrepository.findAllByname(name);
+		}
+		return productrepository.findAll();
+	}
+
+	public List<Product> fetchByProductType(String productType) {
+		return productrepository.findAllByProductType(productType);
+	}
 }

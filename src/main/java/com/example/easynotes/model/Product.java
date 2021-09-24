@@ -7,8 +7,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,14 +40,17 @@ public class Product
 private  Long productId;
 private String name;
 
-
 @OneToOne(cascade=CascadeType.ALL)
 @JoinColumn(name="productId")
 private ProductDescription productdescription;
 
+
 @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 @JoinColumn(name="productId")
 private Set<Company>company = new HashSet<Company>();
+
+@Enumerated(EnumType.STRING)
+private ProductType productType;
 /**
  * @return the company
  */
@@ -56,6 +62,18 @@ public Set<Company> getCompany() {
  */
 public void setCompany(Set<Company> company) {
 	this.company = company;
+}
+/**
+ * @return the productType
+ */
+public ProductType getProductType() {
+	return productType;
+}
+/**
+ * @param productType the productType to set
+ */
+public void setProductType(ProductType productType) {
+	this.productType = productType;
 }
 /**
  * @return the productdescription
@@ -88,10 +106,23 @@ public String getName() {
 	return name;
 }
 /**
+ * @return the productId
+ */
+public Long getProductId() {
+	return productId;
+}
+/**
+ * @param productId the productId to set
+ */
+public void setProductId(Long productId) {
+	this.productId = productId;
+}
+/**
  * @param name the name to set
  */
 public void setName(String name) {
 	this.name = name;
 }
- 
+
+
 }
