@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.easynotes.exception.ResourceNotFoundException;
 import com.example.easynotes.model.Customer;
+import com.example.easynotes.model.Employee;
 import com.example.easynotes.repository.CustomerRepository;
 import com.example.easynotes.service.CustomerService;
 
@@ -31,12 +34,12 @@ import com.example.easynotes.service.CustomerService;
 @RestController
 @RequestMapping("/rest/controller")
 public class CustomerController {
-	
+
 	private final Logger log = LoggerFactory.getLogger(getClass());
-	
+
 	@Autowired
 	CustomerService cutomerservice;
-	
+
 	@Autowired
 	CustomerRepository cutomerrepository;
 
@@ -51,6 +54,7 @@ public class CustomerController {
 		return cutomerservice.saveCustomer(customer);
 
 	}
+
 	/**
 	 * @author Electem2s
 	 * @param <Customer>
@@ -58,17 +62,18 @@ public class CustomerController {
 	 */
 
 	@GetMapping("/customers/{id}")
-	public Customer getCustomerById(@PathVariable(value = "id") Long customerid) {
+	public Customer getCustomerById(@PathVariable(value = "id") Integer customerid) {
 		return cutomerservice.fetchById(customerid);
 	}
+
 	/**
 	 * @author Electem2s
 	 * @param <Customer>
 	 *
 	 */
 	@PutMapping("/Customers/{id}")
-	public Customer updateCustomer(@PathVariable final Long customerId,
-			@Valid @RequestBody final  Customer customerdetails) {
+	public Customer updateCustomer(@PathVariable(value = "id") Integer customerId,
+			@Valid @RequestBody final Customer customerdetails) {
 		/**
 		 * @author Electem2s
 		 * @param <Customer>
@@ -76,7 +81,7 @@ public class CustomerController {
 		 */
 
 		Customer customer = cutomerservice.updateDateCustomer(customerdetails, customerId);
-		return customer;  
+		return customer;
 	}
 
 	@GetMapping("/Customers")
@@ -84,12 +89,15 @@ public class CustomerController {
 		return cutomerservice.fetchallCustomers();
 
 	}
-	@DeleteMapping("/customer/{id}")
-	public Customer deleteCustomer(@PathVariable(value = "id") Customer customerid)
-	{
-		cutomerrepository.delete(customerid);
-		return customerid;
-	
+
+	@DeleteMapping("/cust/{id}")
+	public ResponseEntity<?> deleteEmployee(@PathVariable(value = "id") Integer employeeid) {
+		Customer employee = cutomerrepository.findById(employeeid)
+				.orElseThrow(() -> new ResourceNotFoundException("Employee", "id", employeeid));
+
+		cutomerrepository.delete(employee);
+
+    		return ResponseEntity.ok().build();
 	}
 
 }
