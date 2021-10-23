@@ -10,6 +10,8 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,7 +44,8 @@ public class CustomerController {
 
 	@Autowired
 	CustomerRepository cutomerrepository;
-
+	@Autowired
+	MessageSource messageSource;
 	/**
 	 * @author Electem2s
 	 * @param <Customer>
@@ -91,13 +94,13 @@ public class CustomerController {
 	}
 
 	@DeleteMapping("/cust/{id}")
-	public ResponseEntity<?> deleteEmployee(@PathVariable(value = "id") Integer employeeid) {
+	public String Employee(@PathVariable(value = "id") Integer employeeid) {
 		Customer employee = cutomerrepository.findById(employeeid)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee", "id", employeeid));
 
 		cutomerrepository.delete(employee);
-
-    		return ResponseEntity.ok().build();
+		
+    		return messageSource.getMessage("success.message", null, LocaleContextHolder.getLocale());
 	}
 
 }

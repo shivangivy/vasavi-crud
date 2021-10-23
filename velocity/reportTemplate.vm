@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Good Thymes Virtual Grocery</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" media="all" 
+          href="https://martinfowler.com/bliki/CQRS.html" th:href="@{https://martinfowler.com/bliki/CQRS.html}" />
+         
+	<style>
+		table{
+			border-collapse: collapse;
+			width: 100%;   
+		}
+	th,td{
+		border: 2px solid green; 
+		padding: 15px;
+	}
+	</style>
+	</head>
+	
+	<body>
+	<div class="" style="float:left;">
+       <p>UserName :<span th:text="*{User Name}">$User.getEmailId()</span>.</p>
+       <p>Phone Number :<span th:text="*{PhoneNumber}">$User.getPhoneNumber()</span>.</p>
+    </div>
+	
+	<div style="float:left; width:100%; height:45%";>
+    <p th:utext="#{}">Welcome to Report Template</p>
+    <p>Today is: <span th:text="${today}">23 October 2021</span></p>
+    <a href="tempDatasheet.html" 
+   th:href="@{https://www.thymeleaf.org/}">views</a>
+    </div>  
+    
+    <table id="tableId" style="border-collapse: collapse;
+			width: 100%;">
+<thead>
+
+<tr>
+
+<th style="border: 2px solid green; 
+		padding: 15px;"id="issuetype">ReportId</th>
+<th style="border: 2px solid green; 
+		padding: 15px;" id="originalest">Reportname</th>
+<th style="border: 2px solid green; 
+		padding: 15px;" id="originalest">Created Date</th>
+<th style="border: 2px solid green; 
+		padding: 15px;" id="originalest">Report Type</th>
+
+</tr>
+</thead>
+<tbody>
+#foreach ($report in $!Report)
+<tr>
+<td style="border: 2px solid green; 
+		padding: 15px;" headers="issuetype";th:text="*{getReportId}">$report.getReportId()</td>
+<td style="border: 2px solid green; 
+		padding: 15px;" headers="originalest";th:text="*{getReportName}">$report.getReportName()</td>
+<td style="border: 2px solid green; 
+		padding: 15px;" headers="originalest";th:text="*{getCreatedDate}">$report.getCreatedDate()</td>
+<td style="border: 2px solid green;padding: 15px;" headers="originalest";th:text="*{getType}">
+                                            #if ($report.getType() != '')
+											$report.getType()
+											#else
+											Please add
+											#end
+									</td>
+</tr>
+#end
+</tbody>
+
+</table>
+	</body>
+</html>
